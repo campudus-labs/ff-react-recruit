@@ -7,6 +7,7 @@ import Introduction from './components/Introduction/Introduction.jsx';
 import Technology from './components/Technology/Technology';
 import Philosophy from './components/Philosophy/Philosophy';
 import Character from './components/Character/Character';
+import Visitor from './components/Visitor/Visitor';
 
 import './scss/App.scss';
 
@@ -22,6 +23,7 @@ export default class App extends Component {
           <Technology/>
           <Philosophy/>
           <Contact/>
+          <Visitor/>
         </ContentWrapper>
         <Footer />
       </div>

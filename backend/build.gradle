@@ -1,0 +1,55 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '1.2.3'
+}
+
+repositories {
+    jcenter()
+}
+
+version = '3.3.3'
+sourceCompatibility = '1.8'
+
+dependencies {
+    compile "io.vertx:vertx-core:$version"
+    compile "io.vertx:vertx-web:$version"
+}
+
+mainClassName = 'io.vertx.core.Launcher'
+def mainVerticleName = 'com.campudus.recruit.Server'
+
+run {
+    args = ["run", mainVerticleName, "-conf", "conf.json"]
+}
+
+task runRedeploy(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+
+    main = mainClassName
+
+    args = [
+            "run",
+            mainVerticleName,
+            "-conf", "conf.json",
+            "--redeploy=src/main/**/*.*",
+            "--launcher-class=${mainClassName}",
+            "--on-redeploy=./gradlew build"
+    ]
+}
+
+shadowJar {
+    classifier = 'fat'
+
+    manifest {
+        attributes "Main-Verticle": mainVerticleName
+    }
+
+    mergeServiceFiles {
+        include 'META-INF/services/io.vertx.core.spi.VerticleFactory'
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.14.1'
+}
