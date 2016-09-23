@@ -23,6 +23,21 @@ run {
     args = ["run", mainVerticleName, "-conf", "conf.json"]
 }
 
+task runRedeploy(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+
+    main = mainClassName
+
+    args = [
+            "run",
+            mainVerticleName,
+            "-conf", "conf.json",
+            "--redeploy=src/main/**/*.*",
+            "--launcher-class=${mainClassName}",
+            "--on-redeploy=./gradlew build"
+    ]
+}
+
 shadowJar {
     classifier = 'fat'
 
