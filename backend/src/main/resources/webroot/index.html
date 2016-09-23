@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>EventBus example</title>
+</head>
+<body>
+<script src="http://cdn.jsdelivr.net/sockjs/0.3.4/sockjs.min.js"></script>
+<script src="https://unpkg.com/vertx3-eventbus-client@3.3.3/vertx-eventbus.js"></script>
+<script src="https://unpkg.com/rxjs@5.0.0-beta.12/bundles/Rx.js"></script>
+<script>
+  function UUID(seed) {
+    var UUID = "";
+
+    for (var i = 0; i < 36; i++) {
+      UUID += (function (i) {
+        if (i === 8 || i === 13 || i === 18 || i === 23) return "-";
+        if (i === 14) return "4"; // UUID version flag
+        if (i === 19) return "8"; // Can be "8", "9", "A" or "B"
+        return Math.floor(Math.random(seed) * 16).toString(16);
+      })(i);
+    }
+
+    return UUID;
+  }
+
+  var eb = new EventBus('http://localhost:8080/eventbus');
+  eb.onopen = function () {
+    var uuid = UUID("asdf");
+
+    // set a handler to receive a message
+    eb.registerHandler('heartbeats', function (error, message) {
+      if (message.body && message.body.uuid) {
+        if (message.body.uuid !== uuid) {
+          console.log('received a message: ' + JSON.stringify(message));
+        }
+      }
+    });
+
+    var source = Rx.Observable.timer(500, 2000)
+      .timeInterval()
+      .pluck('interval');
+
+    source.subscribe(function (event) {
+      // send a message
+      eb.send('heartbeat', {'uuid' : uuid});
+    });
+  };
+</script>
+</body>
+</html>

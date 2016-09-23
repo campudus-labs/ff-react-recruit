@@ -43,14 +43,14 @@ public class Server extends AbstractVerticle {
     }));
 
     // Serve the static resources
-    router.route().handler(StaticHandler.create());
+    router.route().handler(StaticHandler.create("webroot", Server.class.getClassLoader()));
 
     // Http server
     vertx.createHttpServer().requestHandler(router::accept).listen(8080);
 
     // Consume
     vertx.eventBus().consumer("heartbeat", event -> {
-      JsonObject message = new JsonObject((String) event.body());
+      JsonObject message = (JsonObject) event.body();
 
       JsonObject json = new JsonObject();
       json.put("uuid", message.getString("uuid"));
