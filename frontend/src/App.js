@@ -7,6 +7,7 @@ import Introduction from './components/Introduction/Introduction.jsx';
 import Technology from './components/Technology/Technology';
 import Phylosophy from './components/Philosophy/Phylosophy';
 import Character from './components/Character/Character';
+
 import './App.css';
 
 export default class App extends Component {
