@@ -5,10 +5,10 @@ import Contact from './components/Contact/Contact.jsx';
 import HeadText from './components/HeadText/HeadText.jsx';
 import Introduction from './components/Introduction/Introduction.jsx';
 import Technology from './components/Technology/Technology';
-import Phylosophy from './components/Philosophy/Phylosophy';
+import Philosophy from './components/Philosophy/Philosophy';
 import Character from './components/Character/Character';
 
-import './App.css';
+import './scss/App.scss';
 
 export default class App extends Component {
   render() {
@@ -20,7 +20,7 @@ export default class App extends Component {
           <Introduction/>
           <Character/>
           <Technology/>
-          <Phylosophy/>
+          <Philosophy/>
           <Contact/>
         </ContentWrapper>
         <Footer />

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class Phylosophy extends Component {
+export default class Philosophy extends Component {
   render() {
     return (
       <div className="philosophy row">

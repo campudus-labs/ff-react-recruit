@@ -13,20 +13,20 @@ export default class Contact extends Component {
         <div className="large-12 columns">
           <form id="recruitment">
             <div>
-              <label for="name">Name</label>
+              <label htmlFor="name">Name</label>
               <input type="text" name="name" id="name" required="required" placeholder="John Smith"/>
             </div>
             <div>
-              <label for="email">E-Mail</label>
+              <label htmlFor="email">E-Mail</label>
               <input type="email" name="email" id="email" required="required" placeholder="your-name@awesome.corp"/>
             </div>
             <div>
-              <label for="url">Portfolio URL*</label>
+              <label htmlFor="url">Portfolio URL*</label>
               <input type="url" name="url" id="url" placeholder="Optional: https://github.com/Narigo"/>
 
               <p className="small">* Git-Repository oder Webseite, auf der Deine derzeitigen Erfolge zu sehen sind.</p>
             </div>
-            <button type="submit">Bewerben <i className="icon-arrow-right"></i></button>
+            <button type="submit">Bewerben <i className="icon-arrow-right"/></button>
           </form>
         </div>
       </div>
