@@ -1,21 +1,37 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
+import Footer from './components/Footer/Footer.jsx';
+import Header from './components/Header/Header.jsx';
+import Contact from './components/Contact/Contact.jsx';
+import HeadText from './components/HeadText/HeadText.jsx';
+import Introduction from './components/Introduction/Introduction.jsx';
+import Technology from './components/Technology/Technology';
+import Phylosophy from './components/Philosophy/Phylosophy';
+import Character from './components/Character/Character';
 import './App.css';
 
-class App extends Component {
+export default class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Header/>
+        <ContentWrapper>
+          <HeadText/>
+          <Introduction/>
+          <Character/>
+          <Technology/>
+          <Phylosophy/>
+          <Contact/>
+        </ContentWrapper>
+        <Footer />
       </div>
     );
   }
 }
 
-export default App;
+const ContentWrapper = (props) => {
+  return (
+    <div className="content-wrapper">
+      {props.children}
+    </div>
+  )
+};
